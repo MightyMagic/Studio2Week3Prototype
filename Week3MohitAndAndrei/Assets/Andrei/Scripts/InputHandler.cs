@@ -5,28 +5,78 @@ using UnityEngine;
 public class InputHandler : MonoBehaviour
 {
     [SerializeField] KeyCode gameButton;
-    Time timeOnPress;
+    [SerializeField] GameObject player;
+
+    [SerializeField] float buttonHoldTime;
+
+    PlayerMovement playerMovement;
+
+    float timeOnPress;
+    private bool startedInput = false;
+    private bool startedWalking = false;
+
     void Start()
     {
-        
+        playerMovement = player.GetComponent<PlayerMovement>();
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(gameButton))
-        {
+       CheckForMovementInput();
+    }
 
+    private void CheckForMovementInput()
+    {
+        if(Input.GetKeyDown(gameButton))
+        {
+            if (!startedInput)
+            {
+                timeOnPress = Time.time;
+                startedInput = true;
+            }
+        }
+
+        else if (Input.GetKey(gameButton))
+        {
+            if (Time.time - timeOnPress > buttonHoldTime && !startedWalking)
+            {
+                startedWalking= true;
+                playerMovement.MoveForward();
+            }
+        }
+
+        else if(Input.GetKeyUp(gameButton))
+        {
+            if (Time.time - timeOnPress < buttonHoldTime)
+            {
+                playerMovement.SwitchDirection();
+            }
+
+            startedInput= false;
+            startedWalking= false;
+            playerMovement.StopMoving();
         }
     }
 
-    private bool IsDoubleClick()
-    {
-        return false;
-    }
 }
 
-public enum TypeOfPress
+public enum TypeOfInput
 {
+    Release,
     Press,
     Hold
 }
+
+/* if(Input.GetKeyDown(gameButton))
+       {
+           if(SingleTap())
+           {
+               playerMovement.MovementAction(TypeOfInput.Press);
+           }
+           if (HoldingTheButton())
+           {
+               playerMovement.MovementAction(TypeOfInput.Hold);
+           }
+       }
+       else
+           playerMovement.MovementAction(TypeOfInput.Release); */
