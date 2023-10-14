@@ -7,30 +7,12 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody rb;
 
     [SerializeField] float movementSpeed;
-    [SerializeField] float rotationSpeed;
+    //[SerializeField] float rotationSpeed;
 
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-    }
-
-    public void MovementAction(TypeOfInput typeOfInput)
-    {
-        switch (typeOfInput)
-        {
-            case TypeOfInput.Release:
-                StopMoving();
-                    break;
-            case TypeOfInput.Press:
-                SwitchDirection();
-                break;
-            case TypeOfInput.Hold:
-                MoveForward();
-                break;
-
-        }
-        print(typeOfInput);
     }
 
     public void StopMoving()
@@ -53,16 +35,4 @@ public class PlayerMovement : MonoBehaviour
         print("move");
     }
 
-    IEnumerator TurnOpposite()
-    {
-        float startingAngle = transform.rotation.eulerAngles.y;
-
-        while(Mathf.Abs(startingAngle - transform.rotation.eulerAngles.y) < 180f)
-        {
-            Vector3 angleVelocity = new Vector3(0, rotationSpeed, 0);
-            Quaternion deltaRotation = Quaternion.Euler(angleVelocity * Time.fixedDeltaTime);
-            rb.MoveRotation(rb.rotation * deltaRotation);
-            yield return null;
-        }
-    }
 }
