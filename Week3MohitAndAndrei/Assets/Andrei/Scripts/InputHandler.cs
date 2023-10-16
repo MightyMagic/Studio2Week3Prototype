@@ -66,17 +66,3 @@ public enum TypeOfInput
     Press,
     Hold
 }
-
-/* if(Input.GetKeyDown(gameButton))
-       {
-           if(SingleTap())
-           {
-               playerMovement.MovementAction(TypeOfInput.Press);
-           }
-           if (HoldingTheButton())
-           {
-               playerMovement.MovementAction(TypeOfInput.Hold);
-           }
-       }
-       else
-           playerMovement.MovementAction(TypeOfInput.Release); */

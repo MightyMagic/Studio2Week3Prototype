@@ -7,9 +7,9 @@ namespace Studio2Week3AndreiMohit
     [System.Serializable]
     public class Projector : MonoBehaviour
     {
-       public float blinkingPeriod;
-       public GameObject projectorObject;
-       public GameObject colliderObject;
+       [SerializeField] private float blinkingPeriod;
+       [SerializeField] private GameObject projectorObject;
+       [SerializeField] private GameObject colliderObject;
        private float localTimer = 0f;
     
         public void Blink()
@@ -39,6 +39,3 @@ namespace Studio2Week3AndreiMohit
 }
 
  
-    //    [SerializeField] private float blinkingPeriod;
-    //    [SerializeField] private GameObject projectorObject;
-    //    [SerializeField] private GameObject colliderObject;

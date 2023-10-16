@@ -24,7 +24,6 @@ public class PlayerMovement : MonoBehaviour
     public void SwitchDirection()
     {
         rb.velocity = Vector3.zero;
-        //StartCoroutine(TurnOpposite());
         Quaternion target = Quaternion.Euler(0, 180f, 0);
         rb.rotation *= target;
     }
