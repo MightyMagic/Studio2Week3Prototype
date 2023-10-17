@@ -39,6 +39,15 @@ public class DoorLogic : MonoBehaviour
                 break;
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            print("Game is over");
+           // Destroy(collision.gameObject);
+        }
+    }
 }
 
 public enum DoorPosition

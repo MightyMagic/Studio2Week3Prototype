@@ -5,13 +5,24 @@ using UnityEngine;
 public class DoorButton : MonoBehaviour
 {
     private bool isPressed = false;
+    float volumeIncrease;
+    Vector3 initialSize;
 
-  
+    private void Start()
+    {
+        initialSize= transform.localScale;
+        volumeIncrease = transform.localScale.x * 0.3f;
+    }
+
+
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
+        {
+            StartCoroutine(blinkingButton());
             StartCoroutine(SwitchDoorPositions());
+        }         
     }
     
     private IEnumerator SwitchDoorPositions() 
@@ -29,9 +40,22 @@ public class DoorButton : MonoBehaviour
             if(doorLogic != null)
                 doorLogic.SwitchPosition();
         }
-        
-        
+
+        transform.localScale *= 0.67f;
     } 
+
+    private IEnumerator blinkingButton()
+    {
+        yield return new WaitForSeconds(0.5f);
+        transform.localScale += new Vector3(volumeIncrease, volumeIncrease, volumeIncrease);
+        yield return new WaitForSeconds(0.5f);
+        transform.localScale -= new Vector3(volumeIncrease, volumeIncrease, volumeIncrease);
+        yield return new WaitForSeconds(0.5f);
+        transform.localScale += new Vector3(volumeIncrease, volumeIncrease, volumeIncrease);
+        yield return new WaitForSeconds(0.5f);
+        transform.localScale -= new Vector3(volumeIncrease, volumeIncrease, volumeIncrease);
+        transform.localScale = initialSize;
+    }
 
    
 }

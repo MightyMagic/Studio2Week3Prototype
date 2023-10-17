@@ -5,14 +5,28 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     Rigidbody rb;
+    Camera mainCam;
 
     [SerializeField] float movementSpeed;
+    Vector3 cameraOffset;
+
+    [SerializeField] GameObject mainModel;
+    Animator mainAnim;
     //[SerializeField] float rotationSpeed;
 
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        mainCam = Camera.main;
+        cameraOffset= mainCam.transform.position - transform.position;
+
+        mainAnim = mainModel.GetComponent<Animator>();
+    }
+
+    private void Update()
+    {
+        mainAnim.SetFloat("Speed", Mathf.Abs(rb.velocity.magnitude));
     }
 
     public void StopMoving()
@@ -32,6 +46,14 @@ public class PlayerMovement : MonoBehaviour
     {
         rb.velocity = transform.forward * movementSpeed;
         print("move");
+        
+    }
+    public void MoveCamera()
+    {
+        if(transform.position.x > -30f)
+        {
+            mainCam.transform.position = transform.position + cameraOffset;
+        }  
     }
 
 }

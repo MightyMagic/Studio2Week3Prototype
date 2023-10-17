@@ -23,6 +23,7 @@ public class InputHandler : MonoBehaviour
     void Update()
     {
        CheckForMovementInput();
+        playerMovement.MoveCamera();
     }
 
     private void CheckForMovementInput()
