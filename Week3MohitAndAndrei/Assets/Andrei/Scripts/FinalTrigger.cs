@@ -23,7 +23,14 @@ public class FinalTrigger : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             victoryCanvas.gameObject.SetActive(true);
+            StartCoroutine(MenuBack());
             //Proceed to next scene
         }
+    }
+
+    public IEnumerator MenuBack()
+    {
+        yield return new WaitForSeconds(10f);
+        SceneManager.LoadScene("MainMenu");
     }
 }

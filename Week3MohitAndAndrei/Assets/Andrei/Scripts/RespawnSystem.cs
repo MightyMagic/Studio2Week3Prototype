@@ -29,7 +29,7 @@ public class RespawnSystem : MonoBehaviour
    
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape)) { Reset();  }
+        if(Input.GetKeyDown(KeyCode.Escape)) { GoBack();  }
     }
 
     public IEnumerator BrutalGameOver()
@@ -46,10 +46,26 @@ public class RespawnSystem : MonoBehaviour
         SceneManager.LoadScene("Mohit");
     }
 
+    public void StartFromCheckpoint()
+    {
+        StartCoroutine(RegularGameOver());
+    }
+
+    public void GoBack()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
     public void Reset()
     {
         if (PlayerPrefs.HasKey("Checkpoint"))
             PlayerPrefs.SetInt("Checkpoint", 0);
         SceneManager.LoadScene("Mohit");
     }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
 }

@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     Camera mainCam;
 
     [SerializeField] float movementSpeed;
-    Vector3 cameraOffset;
+    public Vector3 cameraOffset;
 
     [SerializeField] GameObject mainModel;
     Animator mainAnim;
@@ -52,7 +52,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if(transform.position.x > -30f)
         {
-            mainCam.transform.position = transform.position + cameraOffset;
+            //mainCam.transform.position = transform.position + cameraOffset;
+           Vector3 diff = new Vector3(-1.9f, 3f, -8.29f);
+           mainCam.transform.position = transform.position + diff;
         }  
     }
 
